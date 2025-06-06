@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Personnages Wuwa</title>
+    <style>
+        body {
+            background: #1e1e2f;
+            color: white;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .character {
+            position: relative;
+            width: 200px;
+            background-color: #333;
+            border-radius: 12px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .top-bar {
+                position: absolute;
+                top: 8px;
+                right: 10px;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+        }
+
+        .top-bar .count {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .info-bar {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .character-name {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .type-icon img {
+            margin-top: 0;
+            width: 54px;
+            height: 54px;
+        }
+
+        .count {
+            font-size: 20px;
+            margin: 0 10px;
+            color: #ffc107;
+        }
+
+        .btn {
+            background: #ffc107;
+            border: none;
+            color: black;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Modal */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        #modal .content {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+        }
+
+        .character.R4 {
+            background: -webkit-linear-gradient(270deg, hsla(264, 41%, 37%, 1) 30%, hsla(272, 100%, 65%, 1) 100%);
+        }
+
+        .character.R5 {
+            background: -webkit-linear-gradient(270deg, hsla(36, 42%, 37%, 1) 30%, hsla(34, 100%, 71%, 1) 100%);
+        }
+
+        #characterUnlockList,
+        #characterLockList {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            padding: 10px 0;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Liste des personnages</h2>
+    <h3>Liste des personnages Débloquer</h3>
+    <div id="characterUnlockList"></div>
+    <h3>Liste des personnages Bloquer</h3>
+    <div id="characterLockList"></div>
+    <!-- Modal -->
+    <div id="modal">
+        <div class="content">
+            <h3>Modifier le compteur</h3>
+            <input type="number" id="modalInput" min="0" />
+            <br><br>
+            <button class="btn" onclick="saveCount()">Valider</button>
+            <button class="btn" onclick="closeModal()">Annuler</button>
+        </div>
+    </div>
+
+    <script>
+        let currentCharId = null;
+        let currentCountSpan = null;
+
+        function openModal(id, span) {
+            currentCharId = id;
+            currentCountSpan = span;
+            document.getElementById('modalInput').value = span.textContent;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function saveCount() {
+            const val = parseInt(document.getElementById('modalInput').value);
+            if (isNaN(val)) return;
+
+            fetch('./api/update_character.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: currentCharId, Nombre: val })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        currentCountSpan.textContent = val;
+                    } else {
+                        alert('Erreur : ' + data.error);
+                    }
+                    closeModal();
+                });
+        }
+
+        // Charger personnages
+        fetch('./api/get_characters.php')
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    let container = ""
+                    data.characters.forEach(char => {
+                        const div = document.createElement('div');
+                        if (char.Nombre > 0) {
+                            container = document.getElementById('characterUnlockList');
+                        }
+                        else {
+                            container = document.getElementById('characterLockList');
+                        }
+                        div.className = 'character R' + char.rarity; // applique classe selon type
+                        div.innerHTML = `
+          <div class="top-bar">
+                <span class="count">${char.Nombre}</span>
+                <button class="btn">Modifier</button>
+            </div>
+          <img src="${char.LienImage.trim()}" alt="${char.Nom}">
+         <div class="info-bar">
+            <span class="type-icon">
+                        <img class="character-image" src="https://wutheringlab.com/wp-content/uploads/Wuthering-Waves-${char.Type}.png"alt="${char.Type}">
+
+            </span>
+          <a class="character-name" href="${char.LienVersBuild}" target="_blank">${char.Nom}</a>
+          </div>
+        `;
+                        const countSpan = div.querySelector('.count');
+                        div.querySelector('.btn').onclick = () => openModal(char.id, countSpan);
+                        container.appendChild(div);
+                    });
+                }
+            });
+    </script>
+
+</body>
+
+</html>
