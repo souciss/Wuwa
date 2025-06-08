@@ -1,52 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <title>Wuwa summon</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="script/app.js" defer></script>
+  <link rel="stylesheet" href="css/SummonCss.css">
+  <script src="script/SumApp.js" defer></script>
 </head>
+
 <body>
-
-  <div class="counter">
-    Money: <span id="money">0</span>
-    <button class="btn" onclick="openMoneyModal()">Ajouter</button>
-  </div>
-
-<div id="portalsContainer"></div>  
-
-  <!-- Modal Ajouter Money -->
-  <div id="moneyModal" class="modal">
-    <div class="modal-content">
-      <h3>Ajouter de l'argent</h3>
-      <input type="number" id="addMoneyAmount" min="0" />
-      <button class="btn" onclick="addMoney()">Ajouter</button>
-      <button class="btn" onclick="closeMoneyModal()">Annuler</button>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" />
+        <span>Wuwa Characters</span>
+      </div>
+      <nav class="nav-links">
+        <a href="./index.html">Summon</a>
+        <a href="./character.html">Characters</a>
+      </nav>
+      <div class="counter">
+        <img src="images/astrite.png" alt="coin">
+        <span id="money">0</span>
+        <button class="btn" onclick="openMoneyModal()">Ajouter</button>
+      </div>
     </div>
-  </div>
+  </header>
+  <main>
 
-  <!-- Modal Résultats Tirage -->
-  <div id="resultModal" class="modal">
-    <div class="modal-content">
-      <h3>Résultats du tirage</h3>
-      <label>5★ Banner: <input type="number" id="banner5" min="0" /></label><br />
-      <label>5★ Hors Banner: <input type="number" id="nonBanner5" min="0" /></label><br />
-      <label>4★: <input type="number" id="stars4" min="0" /></label><br />
-      <button class="btn" onclick="saveResults()">Valider</button>
-      <button class="btn" onclick="closeResultModal()">Annuler</button>
+
+
+    <div id="portalsContainer"></div>
+
+    <!-- Modal Ajouter Money -->
+    <div id="moneyModal" class="modal">
+      <div class="modal-content">
+        <h3>Ajouter de l'argent</h3>
+        <input type="number" id="addMoneyAmount" min="0" />
+        <button class="btn" onclick="addMoney()">Ajouter</button>
+        <button class="btn" onclick="closeMoneyModal()">Annuler</button>
+      </div>
     </div>
-  </div>
 
-  <!-- Modal Statistiques Portail -->
-  <div id="portalResultsModal" class="modal">
-    <div class="modal-content">
-      <h3>Statistiques du portail</h3>
-      <p>Total 5★ Banner : <span id="portalBanner5">0</span></p>
-      <p>Total 5★ Hors Banner : <span id="portalNonBanner5">0</span></p>
-      <p>Total 4★ : <span id="portal4">0</span></p>
-      <button class="btn" onclick="closePortalResultsModal()">Fermer</button>
+    <!-- Modal Résultats Tirage -->
+    <div id="resultModal" class="modal">
+      <div class="modal-content">
+        <h3>Résultats du tirage</h3>
+        <label>5★ Banner: <input type="number" id="banner5" min="0" /></label><br />
+        <label>5★ Hors Banner: <input type="number" id="nonBanner5" min="0" /></label><br />
+        <label>4★: <input type="number" id="stars4" min="0" /></label><br />
+        <button class="btn" onclick="saveResults()">Valider</button>
+        <button class="btn" onclick="closeResultModal()">Annuler</button>
+      </div>
     </div>
-  </div>
 
+    <!-- Modal Statistiques Portail -->
+    <div id="portalResultsModal" class="modal">
+      <div class="modal-content">
+        <h3>Statistiques du portail</h3>
+        <p>Total 5★ Banner : <span id="portalBanner5">0</span></p>
+        <p>Total 5★ Hors Banner : <span id="portalNonBanner5">0</span></p>
+        <p>Total 4★ : <span id="portal4">0</span></p>
+        <button class="btn" onclick="closePortalResultsModal()">Fermer</button>
+      </div>
+    </div>
+  </main>
 </body>
+
 </html>

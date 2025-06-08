@@ -1,4 +1,4 @@
-const userId = 1; // Id user à remplacer ou gérer dynamiquement
+const userId = 1;
 
 let money = 0;
 let pulls = {};
