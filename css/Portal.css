@@ -1,0 +1,210 @@
+body {
+    background: #1e1e2f;
+    color: white;
+    font-family: sans-serif;
+    padding: 20px;
+  }
+  .btn {
+    padding: 10px 20px;
+    background: #ffc107;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+  }/* Conteneur des cartes en grille 5 colonnes */
+/* Conteneur des cartes en grille 5 colonnes */
+#cardsContainer {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+gap: 15px;
+padding: 10px 0;
+}
+
+/* Carte entière */
+.card {
+position: relative;
+width: 140px;
+height: 220px;
+border-radius: 12px;
+color: white;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+overflow: hidden;
+box-sizing: border-box;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+background: none;
+cursor: pointer;
+}
+
+
+/* Image de fond */
+.card-bg {
+position: absolute;
+top: 0; left: 0; width: 100%; height: 100%;
+object-fit: cover;
+z-index: 0;
+border-radius: 12px;
+}
+
+/* Image soulignement (underline) : même taille que le fond */
+.underline-img {
+position: absolute;
+top: 0; left: 0; width: 100%; height: 100%;
+object-fit: cover; /* ou contain selon ton image */
+z-index: 1; /* devant le fond, derrière personnage et texte */
+pointer-events: none;
+border-radius: 12px;
+}
+
+/* Image personnage */
+.char-img {
+position: absolute;
+top: 0; left: 0; width: 100%;
+height: calc(100% - 70px); /* hauteur totale moins hauteur underline */
+object-fit: cover;
+border-radius: 12px 12px 0 0;
+z-index: 2;
+}
+
+
+/* Partie texte sous l’image */
+.card-info {
+position: relative;
+z-index: 3;
+padding: 10px 10px 15px;
+text-align: center;
+}
+
+/* Nom + underline "general" (optionnel si tu veux ajouter un effet derrière nom) */
+.name-container {
+position: relative;
+display: inline-block;
+margin-bottom: 8px;
+width: 100%;
+top: 140px;
+
+}
+
+/* Nom */
+.name {
+font-weight: 700;
+font-size: 1rem;
+line-height: 1.2em;
+
+color: white;
+display: block;
+max-width: 100%;
+word-wrap: break-word;
+padding-bottom: 6px; /* espace sous le texte pour le soulignement */
+}
+
+.rarity-icons {
+position: absolute;
+top: 190px;
+right: 9px;
+display: flex;
+gap: 4px;
+z-index: 3;
+}
+
+/* Icônes étoiles */
+.star-icon {
+width: 20px;
+height: 20px;
+filter: drop-shadow(0 0 2px gold);
+}
+#portalsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* espace entre les portails */
+    justify-content: center; /* centre les portails horizontalement */
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+  }
+.portal {
+    margin-bottom: 20px;
+    position: relative;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 10px;
+    color: #ffcc00;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 410px;
+    width: 728px;
+    .btnGacha {
+      position: absolute;
+      display: flex;
+      justify-content: end;
+      bottom: 0;
+      left: 0;
+      padding: 10px;
+    }
+  }
+  
+button.gacha-style {
+    position: relative;
+    width: 23%;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  
+  button.gacha-style:hover {
+    filter: brightness(0.9);
+  }
+  
+  button.gacha-style .bg-img {
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+  }
+  
+  button.gacha-style .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: black;
+  }
+  
+  button.gacha-style .currency {
+    height: 60%;
+  }
+  
+  button.gacha-style .amount {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.9em;
+    line-height: 1;
+  }
+  
+  button.gacha-style .symbol {
+    font-size: 1em;
+    line-height: 1;
+  }
+  
+  button.gacha-style .value {
+    font-size: 1em;
+    line-height: 1;
+  }
+  
+  button.gacha-style .label {
+    font-size: 0.9em;
+  }

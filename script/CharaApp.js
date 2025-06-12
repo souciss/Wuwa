@@ -13,6 +13,7 @@ function closeModal() {
 }
 
 function saveCount() {
+
     const val = parseInt(document.getElementById('modalInput').value);
     if (isNaN(val)) return;
 
@@ -30,6 +31,7 @@ function saveCount() {
             }
             closeModal();
         });
+        location.reload();
 }
 
 // Charger personnages

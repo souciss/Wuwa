@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 06 juin 2025 à 13:19
+-- Généré le : jeu. 12 juin 2025 à 06:36
 -- Version du serveur : 10.11.13-MariaDB-0ubuntu0.24.04.1
 -- Version de PHP : 8.3.17
 
@@ -77,7 +77,8 @@ INSERT INTO `Character` (`id`, `Nom`, `LienVersBuild`, `Nombre`, `LienImage`, `T
 (31, 'Cantarella', 'https://wutheringlab.com/character/cantarella-build/', 0, 'https://wutheringlab.com/wp-content/uploads/Cantarella.webp', 'Havoc', 5),
 (32, 'Rover (Aero)', 'https://wutheringlab.com/character/rover-aero-build/', 0, 'https://wutheringlab.com/wp-content/uploads//MC_Female.png', 'Aero', 5),
 (33, 'Zani', 'https://wutheringlab.com/character/zani-build/', 0, 'https://wutheringlab.com/wp-content/uploads/Zani_Icon.webp', 'Spectro', 5),
-(34, 'Ciaccona', 'https://wutheringlab.com/character/ciaccona-build/', 0, 'https://wutheringlab.com/wp-content/uploads/Ciaccona_Icon.webp', 'Aero', 5);
+(34, 'Ciaccona', 'https://wutheringlab.com/character/ciaccona-build/', 0, 'https://wutheringlab.com/wp-content/uploads/Ciaccona_Icon.webp', 'Aero', 5),
+(35, 'Cartethyia', 'https://wutheringlab.com/character/cartethyia-build/', 0, 'https://wutheringlab.com/wp-content/uploads/Cartethyia-icon.webp', 'Aero', 5);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,9 @@ INSERT INTO `portals` (`id`, `name`, `image_url`) VALUES
 (27, 'Blazing Justice', 'BlazingJustice.png'),
 (28, 'Between Light and Shadow\r\n', 'zani.png'),
 (29, 'Woodland Aria', 'WoodlandAria.png'),
-(30, 'Through Verses and Rhythms', 'ciaccona.png');
+(30, 'Through Verses and Rhythms', 'ciaccona.png'),
+(31, 'Defier\'s Thorn', 'DefierSThorn.png'),
+(32, 'Dance in The Storm\'s Wake', 'cartethyia.png');
 
 -- --------------------------------------------------------
 
@@ -200,13 +203,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `Character`
 --
 ALTER TABLE `Character`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT pour la table `portals`
 --
 ALTER TABLE `portals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `pulls`

@@ -6,7 +6,7 @@ main {
     background: #1e1e2f;
     color: white;
     font-family: sans-serif;
-    padding: 20px;
+    padding: 60px;
 }
 
 .character {
@@ -63,7 +63,6 @@ main {
 }
 
 .character:hover {
-
     transform: translateY(-5px) scale(1.03);
     box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.2);
 }
@@ -107,7 +106,6 @@ main {
 
 }
 
-
 /* Modal */
 #modal {
     display: none;
@@ -149,9 +147,17 @@ input[type="number"] {
 }
 
 .character.R5:hover {
-    background: -webkit-linear-gradient(270deg, hsla(36, 52%, 47%, 1) 30%, hsla(34, 100%, 81%, 1) 100%);
+    background: -webkit-linear-gradient(270deg,  hsla(36, 42%, 47%, 1) 30%,hsla(34, 100%, 86%, 1) 100%);
     background-size: 400% 400%;
     animation: gradientShiftR5 4s ease;
+}
+
+.maxed.character.R5 {
+    
+    background: -webkit-linear-gradient(270deg, #866637 30%, #f9a639 100%);
+}
+.maxed.character.R4 {
+    background: -webkit-linear-gradient(270deg,  hsla(264, 41%, 37%, 1) 30%, rgb(131, 10, 236) 100%);
 }
 
 /* Keyframes pour un effet ondulant */
@@ -186,15 +192,12 @@ input[type="number"] {
 #characterUnlockList,
 #characterLockList {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, max-content));
+    justify-content: center;
+    gap: 30px;
     justify-content: center;
     padding: 10px 0;
 
-}
-
-.maxed {
-    box-shadow: 0 0 16px rgba(255, 196, 0, 0.6), 0 0 12px rgb(229, 255, 0);
 }
 
 .d-none {

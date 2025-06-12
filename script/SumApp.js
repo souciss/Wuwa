@@ -167,7 +167,7 @@ async function loadPortalsAndData() {
           <div class="pull-counter">Tirages effectués : <span id="portal${portal.id}Pulls">0</span></div>
           <button class="btn results-btn" onclick="showPortalResults('${portal.id}')">Résultats</button>
 
-
+          <div class="btnGacha">
           <button class="gacha-style"onclick="pull(1, '${portal.id}')">
           <img src="./images/arrierplan.png" class="bg-img" />
           <div class="content">
@@ -176,22 +176,22 @@ async function loadPortalsAndData() {
               <span class="symbol">×</span>
               <span class="value">1</span>
             </div>
-            <span class="label">Convene</span><span>x1</span>
+            <span class="label">Summon</span><span>x1</span>
           </div>
         </button>
 
-            <button class="gacha-style"onclick="pull(10, '${portal.id}')">
-  <img src="./images/arrierplan.png" class="bg-img" />
-  <div class="content">
-    <img src="./images/currencyInco.png" class="currency" />
-    <div class="amount">
-      <span class="symbol">×</span>
-      <span class="value">10</span>
-    </div>
-    <span class="label">Convene</span><span>x10</span>
-  </div>
-</button>
-
+                  <button class="gacha-style"onclick="pull(10, '${portal.id}')">
+        <img src="./images/arrierplan.png" class="bg-img" />
+        <div class="content">
+          <img src="./images/currencyInco.png" class="currency" />
+          <div class="amount">
+            <span class="symbol">×</span>
+            <span class="value">10</span>
+          </div>
+          <span class="label">Summon</span><span>x10</span>
+        </div>
+      </button>
+</div>
         `;
       portalsContainer.appendChild(div);
     });
