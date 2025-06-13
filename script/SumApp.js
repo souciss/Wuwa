@@ -1,61 +1,14 @@
+import { loadMoney, addMoney , openMoneyModal, closeMoneyModal } from "./Money.js";
 const userId = 1;
-
+window.addMoney = addMoney;
+window.openMoneyModal = openMoneyModal;
+window.closeMoneyModal = closeMoneyModal;
 let money = 0;
 let pulls = {};
 let results = {};
 
 let currentPortalId = null;
 let currentPullsCount = 0;
-
-// Charger l'argent de l'utilisateur depuis le serveur
-async function loadMoney() {
-  try {
-    const res = await fetch(`api/get_money.php?user_id=${userId}`);
-    const data = await res.json();
-    if (data.success) {
-      money = parseInt(data.money) || 0;
-      document.getElementById("money").textContent = money;
-    } else {
-      alert("Erreur chargement money: " + data.error);
-    }
-  } catch (e) {
-    alert("Erreur réseau lors du chargement de money: " + e.message);
-  }
-}
-
-// Ajouter de l'argent côté serveur
-async function addMoney() {
-  const amount = parseInt(document.getElementById("addMoneyAmount").value);
-  if (!isNaN(amount) && amount > 0) {
-    try {
-      const res = await fetch("api/update_money.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId, money_to_add: amount }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        money += amount;
-        document.getElementById("money").textContent = money;
-        closeMoneyModal();
-      } else {
-        alert("Erreur API: " + data.error);
-      }
-    } catch (e) {
-      alert("Erreur réseau: " + e.message);
-    }
-  } else {
-    alert("Entrez un montant valide.");
-  }
-}
-
-function openMoneyModal() {
-  document.getElementById("moneyModal").style.display = "flex";
-  document.getElementById("addMoneyAmount").value = "";
-}
-function closeMoneyModal() {
-  document.getElementById("moneyModal").style.display = "none";
-}
 
 function openResultModal() {
   document.getElementById("banner5").value = 0;
@@ -168,7 +121,7 @@ async function loadPortalsAndData() {
           <button class="btn results-btn" onclick="showPortalResults('${portal.id}')">Résultats</button>
 
           <div class="btnGacha">
-          <button class="gacha-style"onclick="pull(1, '${portal.id}')">
+          <button id="pull1" class="gacha-style"onclick="pull(1, '${portal.id}')">
           <img src="./images/arrierplan.png" class="bg-img" />
           <div class="content">
             <img src="./images/currencyInco.png" class="currency" />
@@ -194,6 +147,7 @@ async function loadPortalsAndData() {
 </div>
         `;
       portalsContainer.appendChild(div);
+
     });
 
     // Charger pulls totals et résultats

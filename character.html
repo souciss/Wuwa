@@ -4,27 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Personnages Wuwa</title>
-    <script src="./script/CharaApp.js" defer></script>
+    <link rel="stylesheet" href="css/HeaderStyle.css">
+    <script src="./script/CharaApp.js" type="module"></script>
     <link rel="stylesheet" href="./css/CharaCss.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="header-container">
-    <div class="logo">
-      <img src="images/logo.png" alt="Logo" />
-      <span>Wuwa Characters</span>
-    </div>
-    <nav class="nav-links">
-      <a href="./index.html">Summon</a>
-      <a href="./character.html">Characters</a>
-    </nav>
-          <div class="counter">
-        <img src="images/astrite.png" alt="coin">
-        <span id="money">0</span>
-        <button class="btn" onclick="openMoneyModal()">Ajouter</button>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" />
+        <span>Wuwa Characters</span>
       </div>
-  </div>
-</header>
+      <nav class="nav-links">
+        <a href="./index.html">Summon</a>
+        <a href="./character.html">Characters</a>
+      </nav>
+      <div class="counter">
+        <img src="images/astrite.png" alt="astrite">
+        <span id="astrite">0</span>
+        <button id="ajouterAstrite" class="btn">Ajouter</button>
+      </div>
+    </div>
+  </header>
 <main>
     <h2>Liste des personnages</h2>
     <h3>Liste des personnages Débloquer</h3>
@@ -37,19 +38,19 @@
             <h3>Modifier le compteur</h3>
             <input type="number" id="modalInput" min="0" />
             <br><br>
-            <button class="btn" onclick="saveCount()">Valider</button>
-            <button class="btn" onclick="closeModal()">Annuler</button>
+            <button id="save" class="btn" >Valider</button>
+            <button id="close" class="btn">Annuler</button>
         </div>
     </div>
 </main>
-    <div id="moneyModal" class="modal">
-      <div class="modal-content">
-        <h3>Ajouter de l'argent</h3>
-        <input type="number" id="addMoneyAmount" min="0" />
-        <button class="btn" onclick="addMoney()">Ajouter</button>
-        <button class="btn" onclick="closeMoneyModal()">Annuler</button>
-      </div>
-    </div>
+<div id="moneyModal" class="modal">
+  <div class="modal-content">
+    <h3>Ajouter de l'argent</h3>
+    <input type="number" id="addMoneyAmount" min="0" />
+    <button id="validerAjout" class="btn">Ajouter</button>
+    <button id="fermerAjout" class="btn">Annuler</button>
+  </div>
+</div>
 
 </body>
 

@@ -3,140 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Invocation</title>
-<link rel="stylesheet" href="css/Portal.css">
+
+  <script src="./script/PortalApp.js" type="module"></script>
+  <link rel="stylesheet" href="css/HeaderStyle.css">
+  <link rel="stylesheet" href="css/Portal.css">
 </head>
 <body>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" />
+        <span>Wuwa Characters</span>
+      </div>
+      <nav class="nav-links">
+        <a href="./index.html">Summon</a>
+        <a href="./character.html">Characters</a>
+      </nav>
+      <div class="counter">
+        <img src="images/astrite.png" alt="astrite">
+        <span id="astrite">0</span>
+        <button id="ajouterAstrite" class="btn">Ajouter</button>
+      </div>
+    </div>
+  </header>
+  <main>
 <div id="portalsContainer">
   <div id="portal" class="portal"></div>
 </div>
   <div id="results"></div>
-
-
-
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const portalId = params.get('id');
-    let charaportal = "";
-    if (!portalId) {
-      document.body.innerHTML = "<h2>Portail non trouvé.</h2>";
-    }
-
-    // Afficher les infos du portail
-    fetch('./api/get_portal_by_id.php?id=' + portalId)
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          const p = data.portal;
-      
-          let portal = document.getElementById('portal')
-  
-          portal.style.backgroundImage = `url('images/${p.image_url}')`;
-          portal.innerHTML = `
-          <h3 id="contentImg" data-img="${p.image_url}">
-            <!-- <img src="images/${p.image_url}" alt="${p.name}" class="portal-img" /> -->
-            ${p.name}
-          </h3>
-          <div class="pull-counter">Tirages effectués : <span id="portal${p.id}Pulls">0</span></div>
-          <button class="btn results-btn" onclick="showPortalResults('${p.id}')">Résultats</button>
-
-          <div class="btnGacha">
-          <button class="gacha-style"onclick="invoke(1)">
-          <img src="./images/arrierplan.png" class="bg-img" />
-          <div class="content">
-            <img src="./images/currencyInco.png" class="currency" />
-            <div class="amount">
-              <span class="symbol">×</span>
-              <span class="value">1</span>
-            </div>
-            <span class="label">Summon</span><span>x1</span>
-          </div>
-        </button>
-
-                  <button class="gacha-style"onclick="invoke(10)">
-        <img src="./images/arrierplan.png" class="bg-img" />
-        <div class="content">
-          <img src="./images/currencyInco.png" class="currency" />
-          <div class="amount">
-            <span class="symbol">×</span>
-            <span class="value">10</span>
-          </div>
-          <span class="label">Summon</span><span>x10</span>
-        </div>
-      </button>
-</div>
-          `;
-        } else {
-          document.body.innerHTML = "<h2>Portail introuvable.</h2>";
-        }
-        const imgElement = document.getElementById('contentImg');
-        const dataImg = imgElement.getAttribute('data-img');
-        charaportal = transformerChaine(dataImg);
-      });
-
-    // Invocation avec proba
-    function invoke(count = 1) {
-  fetch(`api/summon.php?pull=${count}&chara=${charaportal}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        const container = document.getElementById('results');
-        container.innerHTML = `<h3>Résultats :</h3><div id="cardsContainer"></div>`;
-        const cardsContainer = document.getElementById('cardsContainer');
-
-        data.results.forEach(char => {
-          // Classe selon la rareté
-          let rarityClass = '';
-          if (char.rarity == 3) rarityClass = 'star-3';
-          else if (char.rarity == 4) rarityClass = 'star-4';
-          else if (char.rarity == 5) rarityClass = 'star-5';
-          cardsContainer.innerHTML += `
-<div class="card star-${char.rarity}">
-  <img class="card-bg" src="images/background_${char.rarity}.png" alt="Fond ${char.rarity} étoiles">
-  <img class="underline-img" src="images/underline${char.rarity}.png" alt="Soulignement">
-  <img class="char-img" src="${char.LienImage}" alt="${char.Nom}">
-  <div class="card-info">
-    <div class="name-container">
-      <span class="name">${char.Nom}</span>
-    </div>
-    <div class="rarity-icons">
-      ${'<img src="images/star-icon.png" alt="étoile" class="star-icon">'.repeat(char.rarity)}
+  </main>
+  <div id="moneyModal" class="modal">
+    <div class="modal-content">
+      <h3>Ajouter de l'argent</h3>
+      <input type="number" id="addMoneyAmount" min="0" />
+      <button id="validerAjout" class="btn">Ajouter</button>
+      <button id="fermerAjout" class="btn">Annuler</button>
     </div>
   </div>
-</div>
-
-`;
-
-
- /*         cardsContainer.innerHTML += `
-            <div class="card ${rarityClass}">
-              <img src="${char.LienImage}" alt="${char.Nom}">
-              <div class="name">${char.Nom}</div>
-              <div class="rarity">${char.rarity}★</div>
-            </div>
-          `;*/
-        });
-      } else {
-        alert("Erreur dans l'invocation");
-      }
-    });
-}
-
-function transformerChaine(chaine) {
-  // Étape 1 : Couper au premier point
-  let partieAvantPoint = chaine.split('.')[0].trim();
-
-  // Étape 2 : Mettre la première lettre en majuscule
-  if (partieAvantPoint.length === 0) return '';
-
-  let resultat = partieAvantPoint.charAt(0).toUpperCase() + partieAvantPoint.slice(1).toLowerCase();
-  
-  return resultat;
-}
-
-
-
-  </script>
-
 </body>
 </html>

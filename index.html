@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>Wuwa summon</title>
+  <link rel="stylesheet" href="css/HeaderStyle.css">
   <link rel="stylesheet" href="css/SummonCss.css">
-  <script src="script/SumApp.js" defer></script>
+  <script src="script/SumApp.js" type="module"></script>
 </head>
 
 <body>
@@ -20,9 +21,9 @@
         <a href="./character.html">Characters</a>
       </nav>
       <div class="counter">
-        <img src="images/astrite.png" alt="coin">
-        <span id="money">0</span>
-        <button class="btn" onclick="openMoneyModal()">Ajouter</button>
+        <img src="images/astrite.png" alt="astrite">
+        <span id="astrite">0</span>
+        <button id="ajouterAstrite" class="btn">Ajouter</button>
       </div>
     </div>
   </header>
@@ -32,13 +33,12 @@
 
     <div id="portalsContainer"></div>
 
-    <!-- Modal Ajouter Money -->
     <div id="moneyModal" class="modal">
       <div class="modal-content">
         <h3>Ajouter de l'argent</h3>
         <input type="number" id="addMoneyAmount" min="0" />
-        <button class="btn" onclick="addMoney()">Ajouter</button>
-        <button class="btn" onclick="closeMoneyModal()">Annuler</button>
+        <button id="validerAjout" class="btn">Ajouter</button>
+        <button id="fermerAjout" class="btn">Annuler</button>
       </div>
     </div>
 
