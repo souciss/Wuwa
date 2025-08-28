@@ -33,7 +33,9 @@ try {
     }
 
     $new_money = (int)$row['money'] + $money_to_add;
-
+    // fix user being able to exceed int limit on money
+    if($new_money > 2147483647)
+        $new_money = 2147483647;
     // Mettre à jour l'argent
     $update = $pdo->prepare("UPDATE users SET money = ? WHERE id = ?");
     $update->execute([$new_money, $user_id]);
