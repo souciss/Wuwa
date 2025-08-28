@@ -20,7 +20,8 @@ function closeResultModal() {
   document.getElementById("resultModal").style.display = "none";
 }
 
-async function saveResults() {
+
+window.saveResults= async function saveResults() {
   const banner5 = parseInt(document.getElementById("banner5").value) || 0;
   const nonBanner5 = parseInt(document.getElementById("nonBanner5").value) || 0;
   const stars4 = parseInt(document.getElementById("stars4").value) || 0;
@@ -68,7 +69,7 @@ async function saveResults() {
   closeResultModal();
 }
 
-function pull(times, portalId) {
+window.pull = function pull(times, portalId) {
   currentPortalId = portalId;
   currentPullsCount = times;
   pulls[portalId] = pulls[portalId] || 0;
@@ -77,7 +78,7 @@ function pull(times, portalId) {
   openResultModal();
 }
 
-function showPortalResults(portalId) {
+window.showPortalResults = function(portalId) {
   if (!results[portalId]) {
     alert("Pas de résultats pour ce portail.");
     return;
@@ -90,7 +91,7 @@ function showPortalResults(portalId) {
     results[portalId].stars4 || 0;
   document.getElementById("portalResultsModal").style.display = "flex";
 }
-function closePortalResultsModal() {
+window.closePortalResultsModal  = function closePortalResultsModal() {
   document.getElementById("portalResultsModal").style.display = "none";
 }
 
